@@ -1,6 +1,6 @@
 [build]
-  command = "cd apps/api && pnpm build && mkdir -p ../../../netlify/functions && cp -r ./dist/* ../../../netlify/functions"
-  publish = "netlify/functions" 
+  command = "tsc apps/api/index.ts --outfile netlify/functions/index.js && cp apps/api/abi.js netlify/functions/"
+  publish = "netlify/functions"
 
 [dev]
   command = "pnpm build && pnpm start"
