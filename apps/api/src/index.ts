@@ -1,6 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 require("dotenv").config();
-import express from 'express';
 import { createPublicClient, http } from "viem";
 import { mainnet } from "viem/chains";
 import pufferVaultABI from "./abi";
@@ -50,19 +49,21 @@ async function getConversionRate(): Promise<BigNumber> {
   }
 }
 
-const app = express();
-const port = process.env.PORT || 3001; 
 
-app.get('/api/conversion-rate', async (req, res) => {
+// ---  Netlify Function Handler ---
+export const handler = async function () {
   try {
     const conversionRate = await getConversionRate();
-    res.json({ conversionRate: conversionRate.toFixed(18) }); 
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ conversionRate: conversionRate.toFixed(18) }),
+    };
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ error: 'Failed to fetch conversion rate' });
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to fetch conversion rate' }),
+    };
   }
-});
-
-app.listen(port, () => {
-  console.log(`Microservice listening on port ${port}`);
-});
+};
+// --- End of Netlify Function Handler ---
