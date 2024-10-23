@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && pnpm i --prefix ../../netlify/functions",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=../../netlify/functions/index.js",
     "start": "node dist/index.ts",
     "dev": "ts-node src/index.ts",
     "lint": "eslint . && npx --no-install lint-staged"
@@ -16,6 +16,7 @@
     "@eslint/js": "^9.13.0",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.9",
+    "esbuild": "^0.24.0",
     "eslint": "^9.13.0",
     "globals": "^15.11.0",
     "husky": "^9.1.6",
