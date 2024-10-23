@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 require("dotenv").config();
+import express from 'express';
 import { createPublicClient, http } from "viem";
 import { mainnet } from "viem/chains";
 import pufferVaultABI from "./abi";
@@ -13,7 +14,7 @@ const client = createPublicClient({
   transport: http(`https://mainnet.infura.io/v3/${INFURA_ID}`),
 });
 
-async function main() {
+async function getConversionRate(): Promise<BigNumber> {
   try {
     const [totalAssets, totalSupply] = await Promise.all([
       client.readContract({
@@ -31,7 +32,7 @@ async function main() {
     // Check for zero total supply
     if (totalSupply.toString() === "0") {
       console.log("Total supply is zero. Cannot calculate conversion rate.");
-      return "0";
+      return new BigNumber(0)
     }
 
     // TODO(pierregee): penalties and rewards as part of the conversion rate
@@ -49,6 +50,19 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error("Error:", error);
+const app = express();
+const port = process.env.PORT || 3001; 
+
+app.get('/api/conversion-rate', async (req, res) => {
+  try {
+    const conversionRate = await getConversionRate();
+    res.json({ conversionRate: conversionRate.toFixed(18) }); 
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to fetch conversion rate' });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Microservice listening on port ${port}`);
 });

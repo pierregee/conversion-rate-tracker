@@ -3,19 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.ts",
-    "dev": "nodemon src/index.ts",
-    "lint": "eslint . && npx --no-install lint-staged",
-    "prepare": "husky"
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint . && npx --no-install lint-staged"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.7.9",
     "eslint": "^9.13.0",
     "globals": "^15.11.0",
@@ -30,6 +29,7 @@
     "bignumber.js": "^9.1.2",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.4",
+    "express": "^4.21.1",
     "viem": "^2.21.33"
   }
 }

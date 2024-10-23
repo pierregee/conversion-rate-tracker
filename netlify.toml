@@ -1,0 +1,6 @@
+[build]
+  # Assuming you're building your API to a 'dist' directory
+  publish = "apps/api/dist" 
+
+  # Command to build your API (adjust if needed)
+  command = "cd apps/api && npm run build" 
