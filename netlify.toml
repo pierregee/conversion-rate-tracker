@@ -1,5 +1,5 @@
 [build]
-  command = "tsc apps/api/index.ts --outfile netlify/functions/index.js && cp apps/api/abi.js netlify/functions/"
+  command = "pnpm build"
   publish = "netlify/functions"
 
 [dev]
