@@ -1,5 +1,5 @@
 [build]
-  command = "cd apps/api && pnpm build"  
+  command = "cd apps/api && pnpm build && cp -r ./dist/* ../../netlify/functions" 
   publish = "netlify/functions" 
 
 [dev]
