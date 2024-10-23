@@ -20,7 +20,7 @@ async function main() {
         address: CONTRACT_ADDRESS,
         abi: pufferVaultABI,
         functionName: "totalAssets",
-                            }),
+                             }),
       client.readContract({
         address: CONTRACT_ADDRESS,
         abi: pufferVaultABI,
