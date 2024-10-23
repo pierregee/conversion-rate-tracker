@@ -1,6 +1,10 @@
 [build]
-  # Assuming you're building your API to a 'dist' directory
-  publish = "apps/api/dist" 
+  command = "cd apps/api && pnpm build"  
+  publish = "netlify/functions" 
 
-  # Command to build your API (adjust if needed)
-  command = "cd apps/api && npm run build" 
+[dev]
+  command = "pnpm build && pnpm start"
+  port = 3000 
+
+[functions]
+  directory = "netlify/functions"
