@@ -1,26 +1,19 @@
 {
   "name": "conversion-rate-tracker",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.ts",
-    "dev": "nodemon src/index.ts"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@types/node": "^22.7.9",
-    "nodemon": "^3.1.7",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "prettier": "^3.2.5",
+    "turbo": "^2.2.3",
+    "typescript": "^5.4.5"
   },
-  "dependencies": {
-    "bignumber.js": "^9.1.2",
-    "dotenv": "^16.4.5",
-    "ethers": "^6.13.4",
-    "viem": "^2.21.33"
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
   }
 }
