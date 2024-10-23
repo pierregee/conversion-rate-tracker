@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node dist/index.ts",
     "dev": "ts-node src/index.ts",
-    "lint": "eslint . && npx --no-install lint-staged"
+    "lint": "eslint . && npx --no-install lint-staged",
+    "test": "sh -c 'pnpm build && mkdir -p ../../netlify/functions && cp -r ./dist/* ../../netlify/functions'"
   },
   "keywords": [],
   "author": "",
