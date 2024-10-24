@@ -1,6 +1,6 @@
 [build]
   command = "pnpm build:web" 
-  publish = ".next"[build]
+  publish = ".next"
   ignore = "apps/api/**" 
 
 [dev]
