@@ -1,0 +1,11 @@
+
+[dev]
+  functions = "src"  
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild" 
+
+[build]
+  command = "pnpm build"
+  publish = "netlify/functions"

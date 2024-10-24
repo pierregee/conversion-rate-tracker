@@ -5,7 +5,6 @@ export default function Rate() {
   const { isPending, data, isFetching, failureReason } = useConversionRate();
   const hasError = failureReason !== null; // isError is not reliable based on integration tests
 
-  console.log({ failureReason });
   return (
     <div className="container">
       <div className="card">
@@ -13,9 +12,8 @@ export default function Rate() {
         {hasError && <div className="error">An error has occurred</div>}
         {data && (
           <div className="data">
-            <h2 className="title">Conversion Rate</h2>
             <p id="conversion-rate" className="rate">
-              {data.conversionRate}
+              1 ETH = {data.conversionRate} pufETH
             </p>
             {isFetching && <div className="fetching">Updating...</div>}
           </div>

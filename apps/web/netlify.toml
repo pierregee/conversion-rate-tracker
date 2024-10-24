@@ -1,0 +1,12 @@
+[build]
+  command = "pnpm build" 
+  publish = ".next"
+  ignore = "apps/api/**" 
+
+[dev]
+  command = "pnpm run dev" # Or your dev command
+  port = 3000
+  targetPort = 3000 # If needed
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
