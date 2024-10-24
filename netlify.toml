@@ -2,10 +2,6 @@
   command = "pnpm build"
   publish = "netlify/functions"
 
-[dev]
-  command = "pnpm build && pnpm start"
-  port = 3000 
-
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild" 

@@ -2,7 +2,6 @@ import { expect, test, Page } from "@playwright/test";
 
 const apiUrl =
   "https://regal-pudding-4cdd6f.netlify.app/.netlify/functions/index";
-
 const mainPage = "http://localhost:3000";
 
 interface MockApiResponseOptions {

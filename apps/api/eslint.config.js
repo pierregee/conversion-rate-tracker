@@ -3,15 +3,15 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default [
-  { files: ["**/*.{js,mjs,cjs,ts}"],  },
-  { languageOptions:
-    {
-       globals: globals.browser 
-    }
+  { files: ["**/*.{js,mjs,cjs,ts}"] },
+  {
+    languageOptions: {
+      globals: globals.browser,
+    },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ["netlify"], // Add this line to ignore the 'netlify' directory
+    ignores: ["netlify", ".netlify"], // Add this line to ignore the 'netlify' directory
   },
 ];

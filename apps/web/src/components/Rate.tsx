@@ -5,7 +5,6 @@ export default function Rate() {
   const { isPending, data, isFetching, failureReason } = useConversionRate();
   const hasError = failureReason !== null; // isError is not reliable based on integration tests
 
-  console.log({ failureReason });
   return (
     <div className="container">
       <div className="card">

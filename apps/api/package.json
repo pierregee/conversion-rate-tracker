@@ -6,7 +6,7 @@
   "scripts": {
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=../../netlify/functions/index.js",
     "start": "node dist/index.ts",
-    "dev": "ts-node src/index.ts",
+    "dev": "netlify dev",
     "lint": "eslint . && npx --no-install lint-staged"
   },
   "keywords": [],
@@ -27,6 +27,7 @@
     "typescript-eslint": "^8.11.0"
   },
   "dependencies": {
+    "@netlify/functions": "^2.8.2",
     "bignumber.js": "^9.1.2",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.4",

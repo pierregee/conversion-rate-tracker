@@ -1,40 +1,58 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 require("dotenv").config();
 import { createPublicClient, http } from "viem";
-import { mainnet } from "viem/chains";
+import { mainnet, holesky } from "viem/chains";
 import pufferVaultABI from "./abi";
 import BigNumber from "bignumber.js";
+import { Handler, HandlerEvent } from "@netlify/functions";
 
-const CONTRACT_ADDRESS = "0xD9A442856C234a39a81a089C06451EBAa4306a72";
 const INFURA_ID = process.env.INFURA_ID;
+type Address = `0x${string}`;
 
-const client = createPublicClient({
-  chain: mainnet,
-  transport: http(`https://mainnet.infura.io/v3/${INFURA_ID}`),
-});
+const PUFFER_VAULT_ADDRESSES: Record<string, Address> = {
+  mainnet: "0xD9A442856C234a39a81a089C06451EBAa4306a72",
+  holesky: "0x9196830bB4c05504E0A8475A0aD566AceEB6BeC9",
+};
 
-async function getConversionRate(): Promise<BigNumber> {
+type NetworkOption = keyof typeof PUFFER_VAULT_ADDRESSES;
+
+// Function to get the correct client and contract address based on the network
+function getClientAndAddress(network: NetworkOption) {
+  const chain = network === "mainnet" ? mainnet : holesky;
+  const url =
+    network === "mainnet"
+      ? `https://mainnet.infura.io/v3/${INFURA_ID}`
+      : `https://holesky.infura.io/v3/${INFURA_ID}`;
+  const client = createPublicClient({
+    chain,
+    transport: http(url),
+  });
+  const address = PUFFER_VAULT_ADDRESSES[network];
+  return { client, address };
+}
+
+async function getConversionRate(network: NetworkOption): Promise<BigNumber> {
   try {
+    const { client, address } = getClientAndAddress(network);
+
     const [totalAssets, totalSupply] = await Promise.all([
       client.readContract({
-        address: CONTRACT_ADDRESS,
+        address: address,
         abi: pufferVaultABI,
         functionName: "totalAssets",
       }),
       client.readContract({
-        address: CONTRACT_ADDRESS,
+        address: address,
         abi: pufferVaultABI,
         functionName: "totalSupply",
       }),
     ]);
 
-    // Check for zero total supply
     if (totalSupply.toString() === "0") {
       console.log("Total supply is zero. Cannot calculate conversion rate.");
       return new BigNumber(0);
     }
 
-    // TODO(pierregee): penalties and rewards as part of the conversion rate
     const conversionRate = new BigNumber(totalAssets.toString()).dividedBy(
       totalSupply.toString(),
     );
@@ -43,22 +61,23 @@ async function getConversionRate(): Promise<BigNumber> {
 
     return conversionRate;
   } catch (error) {
-    // TODO(pierregee): improve error handling
     console.error("Error:", error);
-    throw error; // Re-throw the error to be handled by the caller
+    throw error;
   }
 }
 
-// ---  Netlify Function Handler ---
-export const handler = async function () {
+export const handler: Handler = async function (event: HandlerEvent) {
   try {
-    const conversionRate = await getConversionRate();
+    // Type assertion to ensure network is one of the allowed types
+    const network =
+      (event.queryStringParameters?.network as NetworkOption) || "mainnet";
+    const conversionRate = await getConversionRate(network);
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*", // Allow requests from any origin
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Allow these HTTP methods
-        "Access-Control-Allow-Headers": "Content-Type", // Allow the Content-Type header
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
       },
       body: JSON.stringify({ conversionRate: conversionRate.toFixed(18) }),
     };
@@ -70,4 +89,3 @@ export const handler = async function () {
     };
   }
 };
-// --- End of Netlify Function Handler ---

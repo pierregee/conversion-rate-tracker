@@ -4,7 +4,6 @@ interface IConversionRate {
   conversionRate: string;
 }
 
-// TODO(pierregee): create dev/prod env
 export default function useConversionRate() {
   return useQuery<IConversionRate>({
     queryKey: ["conversionRate"],
