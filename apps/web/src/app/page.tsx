@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div />}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
         <div className="flex justify-end">
