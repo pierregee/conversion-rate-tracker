@@ -13,7 +13,7 @@ const client = createPublicClient({
   transport: http(`https://mainnet.infura.io/v3/${INFURA_ID}`),
 });
 
-async function main() {
+async function getConversionRate(): Promise<BigNumber> {
   try {
     const [totalAssets, totalSupply] = await Promise.all([
       client.readContract({
@@ -31,7 +31,7 @@ async function main() {
     // Check for zero total supply
     if (totalSupply.toString() === "0") {
       console.log("Total supply is zero. Cannot calculate conversion rate.");
-      return "0";
+      return new BigNumber(0)
     }
 
     // TODO(pierregee): penalties and rewards as part of the conversion rate
@@ -49,6 +49,21 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error("Error:", error);
-});
+
+// ---  Netlify Function Handler ---
+export const handler = async function () {
+  try {
+    const conversionRate = await getConversionRate();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ conversionRate: conversionRate.toFixed(18) }),
+    };
+  } catch (error) {
+    console.error('Error:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to fetch conversion rate' }),
+    };
+  }
+};
+// --- End of Netlify Function Handler ---
