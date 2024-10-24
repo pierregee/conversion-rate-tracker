@@ -30,6 +30,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
 
+      - name: Run linting
+        run: pnpm exec turbo run lint --filter=./apps/web
+
       - name: Start Next.js server
         run: pnpm exec turbo run dev --filter=./apps/web &
 
