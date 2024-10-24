@@ -12,6 +12,6 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ["dist"], // Add this line to ignore the 'dist' directory
+    ignores: ["netlify"], // Add this line to ignore the 'netlify' directory
   },
 ];
