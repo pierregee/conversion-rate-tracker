@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm build:web" 
+  command = "pnpm build" 
   publish = ".next"
   ignore = "apps/api/**" 
 
