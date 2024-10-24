@@ -11,7 +11,7 @@ export type NetworkOption = keyof typeof networkOptions;
 export default function useNetwork() {
   const searchParams = useSearchParams();
   const [network, setNetwork] = useState<NetworkOption>(
-    (searchParams.get("network") as NetworkOption) || "Mainnet"
+    (searchParams.get("network") as NetworkOption) || networkOptions.Mainnet
   );
 
   return { network, setNetwork };

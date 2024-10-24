@@ -79,7 +79,7 @@ export const handler: Handler = async function (event: HandlerEvent) {
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
       },
-      body: JSON.stringify({ conversionRate: conversionRate.toFixed(18) }),
+      body: JSON.stringify({ conversionRate: conversionRate.toFixed(8) }),
     };
   } catch (error) {
     console.error("Error:", error);

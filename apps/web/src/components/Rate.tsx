@@ -14,7 +14,7 @@ export default function Rate() {
           <div className="data">
             <h2 className="title">Conversion Rate</h2>
             <p id="conversion-rate" className="rate">
-              {data.conversionRate}
+              1 ETH = {data.conversionRate} pufETH
             </p>
             {isFetching && <div className="fetching">Updating...</div>}
           </div>
