@@ -33,12 +33,8 @@ jobs:
       - name: Start Next.js server
         run: pnpm run dev &
         working-directory: apps/web
-        env:
-          NEXT_PUBLIC_API_BASE_URL: https://puffer-vault-rate-api.netlify.app/.netlify/functions/index
       - name: Wait for server to start
         run: npx wait-on http://localhost:3000
       - name: Run Playwright tests
         run: npx playwright test
         working-directory: apps/web
-        env:
-          NEXT_PUBLIC_API_BASE_URL: https://puffer-vault-rate-api.netlify.app/.netlify/functions/index
