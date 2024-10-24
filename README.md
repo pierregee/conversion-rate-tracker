@@ -8,18 +8,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-1. Clone the repository:
+1. Clone the repository
 
-   ```bash
-   git clone [https://github.com/your-username/conversion-rate-tracker.git](https://github.com/your-username/conversion-rate-tracker.git)
-
-   ```
-
-2. Install dependencies `npm i` || `pnpm i`
+2. Install dependencies `npm i` or `pnpm i`
 
 3. Run `npm dev` or `pnpm dev`
 
-This will start the development server.
+4. This will start the development server. Navigate to `http://localhost:3000/`
 
 ## Deployment
 
