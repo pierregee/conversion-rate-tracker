@@ -20,7 +20,7 @@ async function getConversionRate(): Promise<BigNumber> {
         address: CONTRACT_ADDRESS,
         abi: pufferVaultABI,
         functionName: "totalAssets",
-                             }),
+      }),
       client.readContract({
         address: CONTRACT_ADDRESS,
         abi: pufferVaultABI,
@@ -31,7 +31,7 @@ async function getConversionRate(): Promise<BigNumber> {
     // Check for zero total supply
     if (totalSupply.toString() === "0") {
       console.log("Total supply is zero. Cannot calculate conversion rate.");
-      return new BigNumber(0)
+      return new BigNumber(0);
     }
 
     // TODO(pierregee): penalties and rewards as part of the conversion rate
@@ -49,20 +49,24 @@ async function getConversionRate(): Promise<BigNumber> {
   }
 }
 
-
 // ---  Netlify Function Handler ---
 export const handler = async function () {
   try {
     const conversionRate = await getConversionRate();
     return {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow requests from any origin
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", // Allow these HTTP methods
+        "Access-Control-Allow-Headers": "Content-Type", // Allow the Content-Type header
+      },
       body: JSON.stringify({ conversionRate: conversionRate.toFixed(18) }),
     };
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to fetch conversion rate' }),
+      body: JSON.stringify({ error: "Failed to fetch conversion rate" }),
     };
   }
 };
