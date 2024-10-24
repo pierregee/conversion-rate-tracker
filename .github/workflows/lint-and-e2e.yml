@@ -1,4 +1,5 @@
 name: Lint and e2e tests
+
 on:
   push:
     branches:
@@ -6,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   test:
     timeout-minutes: 60
@@ -27,6 +29,21 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
         working-directory: apps/web
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwoff2dec-dev \
+            libvpx-dev \
+            libevent-dev \
+            libopus-dev \
+            gstreamer1.0-libav \
+            libharfbuzz-dev \
+            libhyphen-dev \
+            libmanette-0.2-dev \
+            libflite-dev \
+            libgles2-mesa-dev \
+            libx264-dev
       - name: Run linting
         run: pnpm run lint
         working-directory: apps/web
