@@ -10,7 +10,7 @@ export default function useConversionRate() {
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; // Access the env variable
 
   return useQuery<IConversionRate>({
-    queryKey: ["conversionRate"],
+    queryKey: ["conversionRate", network],
     queryFn: async () => {
       const response = await fetch(`${baseUrl}?network=${network}`);
       return await response.json();

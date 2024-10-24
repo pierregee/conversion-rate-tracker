@@ -13,7 +13,9 @@ export default function App() {
     <Suspense fallback={<div>Loading...</div>}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
-        <NetworkDropdown />
+        <div className="flex justify-end">
+          <NetworkDropdown />
+        </div>
         <Rate />
       </QueryClientProvider>
     </Suspense>

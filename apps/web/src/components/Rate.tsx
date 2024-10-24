@@ -12,7 +12,6 @@ export default function Rate() {
         {hasError && <div className="error">An error has occurred</div>}
         {data && (
           <div className="data">
-            <h2 className="title">Conversion Rate</h2>
             <p id="conversion-rate" className="rate">
               1 ETH = {data.conversionRate} pufETH
             </p>

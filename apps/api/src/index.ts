@@ -16,11 +16,10 @@ const PUFFER_VAULT_ADDRESSES: Record<string, Address> = {
 
 type NetworkOption = keyof typeof PUFFER_VAULT_ADDRESSES;
 
-// Function to get the correct client and contract address based on the network
 function getClientAndAddress(network: NetworkOption) {
-  const chain = network === "mainnet" ? mainnet : holesky;
+  const chain = network === "holesky" ? holesky: mainnet 
   const url =
-    network === "mainnet"
+    network === "mainnet" 
       ? `https://mainnet.infura.io/v3/${INFURA_ID}`
       : `https://holesky.infura.io/v3/${INFURA_ID}`;
   const client = createPublicClient({
@@ -68,7 +67,6 @@ async function getConversionRate(network: NetworkOption): Promise<BigNumber> {
 
 export const handler: Handler = async function (event: HandlerEvent) {
   try {
-    // Type assertion to ensure network is one of the allowed types
     const network =
       (event.queryStringParameters?.network as NetworkOption) || "mainnet";
     const conversionRate = await getConversionRate(network);
