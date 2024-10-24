@@ -1,45 +1,37 @@
 name: Lint and e2e tests
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
-
+    branches:
+      - main
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    environment:
-      NEXT_PUBLIC_API_BASE_URL: https://puffer-vault-rate-api.netlify.app/.netlify/functions/index
-
     steps:
       - uses: actions/checkout@v3
-
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
-          cache: "pnpm"
-
+          node-version: 18.x
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
-
       - name: Install Playwright Browsers
         run: npx playwright install
-
       - name: Run linting
         run: pnpm exec turbo run lint --filter=./apps/web
-
       - name: Start Next.js server
         run: pnpm exec turbo run dev --filter=./apps/web &
-
       - name: Wait for server to start
         run: npx wait-on http://localhost:3000
-
       - name: Run Playwright tests
         run: pnpm exec playwright test
+        env:
+          NEXT_PUBLIC_API_BASE_URL: your_api_base_url # Or ${{ secrets.API_BASE_URL }}
