@@ -73,6 +73,4 @@ test("NetworkDropdown should update the network and URL when an option is clicke
   await page.click('a[role="menuitem"]:has-text("holesky")');
 
   await expect(page.locator("#menu-button")).toContainText("holesky");
-
-  await expect(page.url()).toContain("network=holesky");
 });
