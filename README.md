@@ -2,6 +2,11 @@
 
 This project is a conversion rate tracker application.
 
+It includes two parts: a web application and a serverless function. Here's how to test each:
+
+Web Application: Visit https://conversion-rate-tracker-app.netlify.app/ in your web browser to interact with the user interface.
+Serverless Function: The serverless function retrieves currency conversion rates. You can test it directly by visiting this URL: https://puffer-vault-rate-api.netlify.app/.netlify/functions/index?network=holesky. This will call the function and return the current rate data.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
