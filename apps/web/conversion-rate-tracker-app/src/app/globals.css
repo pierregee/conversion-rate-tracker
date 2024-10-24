@@ -19,3 +19,39 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.title {
+  color: #333;
+}
+
+.rate {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #007bff;
+}
+
+.loading,
+.fetching {
+  color: #666;
+  font-style: italic;
+}
+
+.error {
+  color: #dc3545;
+}

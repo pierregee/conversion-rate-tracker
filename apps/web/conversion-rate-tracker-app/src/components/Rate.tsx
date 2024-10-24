@@ -1,17 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
+import useConversionRate from "@/hooks/conversionRate";
 import React from "react";
 
 export default function Rate() {
-  const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: async () => {
-      const response = await fetch(
-        "https://regal-pudding-4cdd6f.netlify.app/.netlify/functions/index"
-      );
-      return await response.json();
-    },
-  });
-  console.log({ isPending, error, data, isFetching });
+  const { isPending, error, data, isFetching } = useConversionRate();
 
-  return <div>Rate.tsx</div>;
+  return (
+    <div className="container">
+      <div className="card">
+        {isPending && <div className="loading">Loading...</div>}
+        {error && (
+          <div className="error">An error has occurred: {error.message}</div>
+        )}
+        {data && (
+          <div className="data">
+            <h2 className="title">Conversion Rate</h2>
+            <p className="rate">{data.conversionRate}</p>
+            {isFetching && <div className="fetching">Updating...</div>}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
