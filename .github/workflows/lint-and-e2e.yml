@@ -25,7 +25,9 @@ jobs:
         run: pnpm install
         working-directory: apps/web
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: |
+          sudo npx playwright install-deps
+          npx playwright install
         working-directory: apps/web
       - name: Run linting
         run: pnpm run lint
