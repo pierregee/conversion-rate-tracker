@@ -12,7 +12,9 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "dependsOn": ["^build"],
+      "persistent": true,
+      "outputs": []
     }
   }
 }
