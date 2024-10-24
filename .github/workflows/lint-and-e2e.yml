@@ -10,6 +10,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: https://puffer-vault-rate-api.netlify.app/.netlify/functions/index
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm

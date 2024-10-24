@@ -2,9 +2,7 @@
   "name": "conversion-rate-tracker",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint"
+    "dev": "(cd apps/web && pnpm run dev) & (cd apps/api && pnpm run dev)"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.1",
