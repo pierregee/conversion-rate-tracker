@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone the repository
 
-2. Install dependencies `npm i` or `pnpm i`
+2. Install dependencies `pnpm run install:all` || `npm run install:all`
 
 3. Run `npm dev` or `pnpm dev`
 

@@ -2,6 +2,7 @@
   "name": "conversion-rate-tracker",
   "private": true,
   "scripts": {
+    "install:all": "(cd apps/web && pnpm i) & (cd apps/api && pnpm i)",
     "dev": "(cd apps/web && pnpm run dev) & (cd apps/api && pnpm run dev)"
   },
   "devDependencies": {
