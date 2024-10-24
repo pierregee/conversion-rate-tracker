@@ -4,7 +4,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "build:api": "turbo run build --filter=./apps/api..."
   },
   "devDependencies": {
     "@playwright/test": "^1.48.1",
