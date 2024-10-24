@@ -23,6 +23,14 @@ This project is automatically deployed to Netlify.
 - Continuous Deployment: Every push to the main branch triggers a new production build and deployment.
 - Preview Deployments: A preview deployment is created for each pull request to the main branch, allowing you to test changes before merging.
 
+## CI/CD
+
+This repository uses GitHub Actions to run the e2e tests and linting on each push.
+
+## E2E Testing
+
+Run `pnpm test:ui` on `apps/web`
+
 ## Built With
 
 - Next.js - The React Framework
