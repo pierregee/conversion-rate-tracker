@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "playwright test"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.16",
@@ -16,6 +17,7 @@
     "react-dom": "19.0.0-rc-69d4b800-20241021"
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

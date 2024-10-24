@@ -1,0 +1,49 @@
+name: Lint and e2e tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
+      - name: Run linting
+        run: pnpm exec turbo run lint --filter=./apps/web
+
+      - name: Start Next.js server
+        run: pnpm exec turbo run dev --filter=./apps/web &
+
+      - name: Wait for server to start
+        run: npx wait-on http://localhost:3000
+
+      - name: Run Playwright tests
+        run: pnpm exec playwright test
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
