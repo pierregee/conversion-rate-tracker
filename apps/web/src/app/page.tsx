@@ -14,13 +14,13 @@ export default function App() {
     <Suspense fallback={<div />}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
-        <div className="flex justify-between items-center">
-          <Image
-            src="/puffer-fi.png"
-            alt="Pufferfish"
-            width={150}
-            height={250}
-          />
+        <Image
+          src="/puffer-fi.png" // Path to your image in the 'public' directory
+          alt="Pufferfish"
+          width={50} // Specify the width of the image in pixels
+          height={50} // Specify the height of the image in pixels
+        />
+        <div className="flex justify-end">
           <NetworkDropdown />
         </div>
         <Rate />
