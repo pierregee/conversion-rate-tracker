@@ -12,7 +12,7 @@ export default function useNetwork() {
   const searchParams = useSearchParams();
 
   const [network, setNetwork] = useState<NetworkOption>(
-    searchParams.get("network") as NetworkOption
+    (searchParams.get("network") as NetworkOption) || "mainnet"
   );
 
   useEffect(() => {
