@@ -23,15 +23,20 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install
+        working-directory: apps/web
       - name: Install Playwright Browsers
         run: npx playwright install
+        working-directory: apps/web
       - name: Run linting
-        run: pnpm exec turbo run lint --filter=./apps/web
+        run: pnpm run lint
+        working-directory: apps/web
       - name: Start Next.js server
-        run: pnpm exec turbo run dev --filter=./apps/web &
+        run: pnpm run dev &
+        working-directory: apps/web
       - name: Wait for server to start
         run: npx wait-on http://localhost:3000
       - name: Run Playwright tests
-        run: pnpm exec playwright test
+        run: npx playwright test
+        working-directory: apps/web
         env:
-          NEXT_PUBLIC_API_BASE_URL: your_api_base_url # Or ${{ secrets.API_BASE_URL }}
+          NEXT_PUBLIC_API_BASE_URL: https://puffer-vault-rate-api.netlify.app/.netlify/functions/index
