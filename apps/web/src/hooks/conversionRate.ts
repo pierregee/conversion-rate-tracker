@@ -9,7 +9,7 @@ export default function useConversionRate() {
     queryKey: ["conversionRate"],
     queryFn: async () => {
       const response = await fetch(
-        "https://regal-pudding-4cdd6f.netlify.app/.netlify/functions/index"
+        "https://puffer-vault-rate-api.netlify.app/.netlify/functions/index"
       );
       return await response.json();
     },

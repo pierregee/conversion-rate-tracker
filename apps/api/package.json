@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=../../netlify/functions/index.js",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=../../apps/api/netlify/functions/index.js",
     "start": "node dist/index.ts",
     "dev": "netlify dev",
     "lint": "eslint . && npx --no-install lint-staged"
